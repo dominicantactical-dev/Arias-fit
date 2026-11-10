@@ -1,0 +1,1107 @@
+
+
+<!doctype html>
+
+<html lang="es">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+<meta name="theme-color" content="#16834e">
+
+<title>Arias Fit</title>
+
+<style>
+
+:root{
+
+  --green:#16834e;
+
+  --dark:#123b29;
+
+  --mint:#eaf6ee;
+
+  --bg:#f5f8f5;
+
+  --muted:#718078;
+
+}
+
+*{box-sizing:border-box}
+
+body{
+
+  margin:0;
+
+  background:var(--bg);
+
+  color:var(--dark);
+
+  font:16px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+
+}
+
+main{
+
+  max-width:620px;
+
+  margin:auto;
+
+  padding:18px 16px 40px;
+
+}
+
+header{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  padding:12px 2px 20px;
+
+}
+
+.brand{
+
+  font-size:24px;
+
+  font-weight:850;
+
+  color:var(--green);
+
+}
+
+.sub{
+
+  font-size:12px;
+
+  color:var(--muted);
+
+  margin-top:3px;
+
+}
+
+.pill{
+
+  background:var(--mint);
+
+  color:var(--green);
+
+  border-radius:99px;
+
+  padding:8px 11px;
+
+  font-size:12px;
+
+  font-weight:700;
+
+}
+
+h1{
+
+  font-size:25px;
+
+  margin:8px 0 4px;
+
+}
+
+h2{
+
+  font-size:17px;
+
+  margin:0 0 14px;
+
+}
+
+.card{
+
+  background:#fff;
+
+  border:1px solid #e8eee9;
+
+  border-radius:20px;
+
+  padding:17px;
+
+  margin:13px 0;
+
+}
+
+.muted{
+
+  color:var(--muted);
+
+  font-size:13px;
+
+}
+
+.stats{
+
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:10px;
+
+}
+
+.stat{
+
+  background:#f7faf7;
+
+  border-radius:15px;
+
+  padding:14px;
+
+}
+
+.num{
+
+  font-size:27px;
+
+  font-weight:800;
+
+  margin:5px 0;
+
+}
+
+.green{color:var(--green)}
+
+.track{
+
+  height:10px;
+
+  background:#e8efe9;
+
+  border-radius:20px;
+
+  overflow:hidden;
+
+  margin:12px 0 5px;
+
+}
+
+.fill{
+
+  height:100%;
+
+  background:var(--green);
+
+  border-radius:20px;
+
+  width:0;
+
+}
+
+input,select,button{font:inherit}
+
+input[type=text],
+
+input[type=number],
+
+select{
+
+  width:100%;
+
+  border:1px solid #dce6de;
+
+  border-radius:12px;
+
+  padding:13px;
+
+  background:white;
+
+  margin:6px 0 11px;
+
+  color:var(--dark);
+
+}
+
+button{
+
+  border:0;
+
+  border-radius:12px;
+
+  padding:13px 15px;
+
+  background:var(--green);
+
+  color:white;
+
+  font-weight:750;
+
+  width:100%;
+
+  margin-top:5px;
+
+}
+
+button.danger{
+
+  background:#fff0ef;
+
+  color:#a43c32;
+
+  width:auto;
+
+}
+
+.row{
+
+  display:flex;
+
+  gap:9px;
+
+}
+
+.row>*{
+
+  flex:1;
+
+}
+
+label{
+
+  font-size:12px;
+
+  font-weight:700;
+
+  color:#52665a;
+
+}
+
+.food{
+
+  display:flex;
+
+  gap:12px;
+
+  align-items:center;
+
+  padding:11px 0;
+
+  border-bottom:1px solid #edf1ed;
+
+}
+
+.thumb{
+
+  width:64px;
+
+  height:64px;
+
+  object-fit:cover;
+
+  border-radius:12px;
+
+  background:var(--mint);
+
+}
+
+.foodname{
+
+  font-weight:750;
+
+}
+
+.foodmeta{
+
+  font-size:12px;
+
+  color:var(--muted);
+
+  margin-top:4px;
+
+}
+
+.tabs{
+
+  display:grid;
+
+  grid-template-columns:repeat(3,1fr);
+
+  gap:7px;
+
+  margin:15px 0;
+
+}
+
+.tabs button{
+
+  margin:0;
+
+  padding:11px 5px;
+
+  font-size:13px;
+
+}
+
+.tabs button.active{
+
+  background:var(--green);
+
+  color:#fff;
+
+}
+
+.tabs button:not(.active){
+
+  background:#eaf2ec;
+
+  color:#35664a;
+
+}
+
+.hidden{
+
+  display:none!important;
+
+}
+
+.notice{
+
+  background:#fff8e7;
+
+  color:#795c16;
+
+  padding:12px;
+
+  border-radius:12px;
+
+  font-size:12px;
+
+  line-height:1.45;
+
+}
+
+canvas{
+
+  width:100%;
+
+  height:130px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<main>
+
+<header>
+
+  <div>
+
+    <div class="brand">✦ Arias Fit</div>
+
+    <div class="sub">Tu salud, tu progreso, cada día</div>
+
+  </div>
+
+  <span class="pill">2.100 kcal</span>
+
+</header>
+
+<section>
+
+  <div class="muted" id="today"></div>
+
+  <h1>Tu progreso de hoy</h1>
+
+  <div class="muted">Pequeños pasos, grandes cambios.</div>
+
+</section>
+
+<section class="card">
+
+  <div class="stats">
+
+    <div class="stat">
+
+      <div class="muted">Consumidas</div>
+
+      <div class="num green" id="total">0</div>
+
+      <div class="muted">kcal registradas</div>
+
+    </div>
+
+    <div class="stat">
+
+      <div class="muted">Restantes</div>
+
+      <div class="num" id="left">2.100</div>
+
+      <div class="muted">de tu objetivo</div>
+
+    </div>
+
+  </div>
+
+  <div class="track">
+
+    <div class="fill" id="bar"></div>
+
+  </div>
+
+  <div class="muted" id="progress">0% de tu meta diaria</div>
+
+</section>
+
+<div class="tabs">
+
+  <button class="active" data-tab="meals">Comidas</button>
+
+  <button data-tab="weight">Mi peso</button>
+
+  <button data-tab="history">Historial</button>
+
+</div>
+
+<section id="meals">
+
+  <div class="card">
+
+    <h2>Registrar comida</h2>
+
+    <label>¿Qué comiste?</label>
+
+    <input id="food" type="text" placeholder="Ej. Pollo con arroz">
+
+    <div class="row">
+
+      <div>
+
+        <label>Momento</label>
+
+        <select id="meal">
+
+          <option>Desayuno</option>
+
+          <option>Almuerzo</option>
+
+          <option>Cena</option>
+
+          <option>Merienda</option>
+
+        </select>
+
+      </div>
+
+      <div>
+
+        <label>Calorías</label>
+
+        <input id="cal" type="number" min="1" placeholder="450">
+
+      </div>
+
+    </div>
+
+    <label>Foto de tu comida</label>
+
+    <input id="photo" type="file" accept="image/*" capture="environment">
+
+    <button id="add">Guardar comida</button>
+
+  </div>
+
+  <div class="card">
+
+    <h2>Lo que llevas hoy</h2>
+
+    <div id="todayFoods" class="muted">Aún no hay comidas.</div>
+
+  </div>
+
+</section>
+
+<section id="weight" class="hidden">
+
+  <div class="card">
+
+    <h2>Control de peso</h2>
+
+    <div class="muted">Meta: 95 kg</div>
+
+    <div class="num green" id="latestWeight">120 kg</div>
+
+    <label>Registrar peso</label>
+
+    <input id="kg" type="number" step=".1" min="1" placeholder="119.5">
+
+    <button id="saveWeight">Guardar peso</button>
+
+  </div>
+
+  <div class="card">
+
+    <h2>Evolución</h2>
+
+    <canvas id="chart" width="560" height="150"></canvas>
+
+    <div id="weightList" class="muted"></div>
+
+  </div>
+
+</section>
+
+<section id="history" class="hidden">
+
+  <div class="card">
+
+    <h2>Historial de comidas</h2>
+
+    <div id="allFoods" class="muted">Todavía no hay registros.</div>
+
+  </div>
+
+  <div class="card">
+
+    <h2>Respaldo</h2>
+
+    <button id="export">Exportar respaldo</button>
+
+    <input id="import" type="file" accept="application/json">
+
+  </div>
+
+</section>
+
+<div class="card">
+
+  <div class="notice">
+
+    El reconocimiento automático de alimentos por IA y Apple Salud se añadirán después.
+
+  </div>
+
+</div>
+
+</main>
+
+<script>
+
+const GOAL = 2100;
+
+const FOODKEY = 'arias-fit-foods';
+
+const WEIGHTKEY = 'arias-fit-weights';
+
+const $ = id => document.getElementById(id);
+
+function today(){
+
+  const d = new Date();
+
+  return d.getFullYear() + '-' +
+
+    String(d.getMonth()+1).padStart(2,'0') + '-' +
+
+    String(d.getDate()).padStart(2,'0');
+
+}
+
+function read(key){
+
+  try{
+
+    return JSON.parse(localStorage.getItem(key) || '[]');
+
+  }catch{
+
+    return [];
+
+  }
+
+}
+
+let foods = read(FOODKEY);
+
+let weights = read(WEIGHTKEY);
+
+const dbp = new Promise((resolve,reject)=>{
+
+  const r = indexedDB.open('arias-fit-media',1);
+
+  r.onupgradeneeded = ()=>{
+
+    if(!r.result.objectStoreNames.contains('photos')){
+
+      r.result.createObjectStore('photos');
+
+    }
+
+  };
+
+  r.onsuccess = ()=>resolve(r.result);
+
+  r.onerror = ()=>reject(r.error);
+
+});
+
+async function putPhoto(id,blob){
+
+  const db = await dbp;
+
+  return new Promise((resolve,reject)=>{
+
+    const tx = db.transaction('photos','readwrite');
+
+    tx.objectStore('photos').put(blob,id);
+
+    tx.oncomplete = resolve;
+
+    tx.onerror = ()=>reject(tx.error);
+
+  });
+
+}
+
+async function getPhoto(id){
+
+  if(!id) return null;
+
+  const db = await dbp;
+
+  return new Promise((resolve,reject)=>{
+
+    const r = db.transaction('photos').objectStore('photos').get(id);
+
+    r.onsuccess = ()=>resolve(r.result || null);
+
+    r.onerror = ()=>reject(r.error);
+
+  });
+
+}
+
+function persist(){
+
+  localStorage.setItem(FOODKEY,JSON.stringify(foods));
+
+  localStorage.setItem(WEIGHTKEY,JSON.stringify(weights));
+
+}
+
+function safe(s){
+
+  return String(s).replace(/[&<>"']/g,c=>({
+
+    '&':'&amp;',
+
+    '<':'&lt;',
+
+    '>':'&gt;',
+
+    '"':'&quot;',
+
+    "'":'&#39;'
+
+  }[c]));
+
+}
+
+function dateLabel(s){
+
+  return new Date(s+'T12:00:00').toLocaleDateString('es-CL',{
+
+    day:'numeric',
+
+    month:'short',
+
+    year:'numeric'
+
+  });
+
+}
+
+async function foodRow(x){
+
+  let img = '';
+
+  try{
+
+    const blob = await getPhoto(x.photoId);
+
+    if(blob) img = URL.createObjectURL(blob);
+
+  }catch{}
+
+  const el = document.createElement('div');
+
+  el.className = 'food';
+
+  const im = document.createElement('img');
+
+  im.className = 'thumb';
+
+  if(img){
+
+    im.src = img;
+
+  }
+
+  const body = document.createElement('div');
+
+  body.style.flex = '1';
+
+  body.innerHTML =
+
+    '<div class="foodname">'+safe(x.food)+'</div>'+
+
+    '<div class="foodmeta">'+
+
+    safe(x.meal)+' · '+
+
+    dateLabel(x.date)+' · '+
+
+    x.cal+' kcal</div>';
+
+  const del = document.createElement('button');
+
+  del.className = 'danger';
+
+  del.textContent = '×';
+
+  del.onclick = ()=>{
+
+    if(confirm('¿Eliminar este registro?')){
+
+      foods = foods.filter(y=>y.id!==x.id);
+
+      persist();
+
+      render();
+
+    }
+
+  };
+
+  el.append(im,body,del);
+
+  return el;
+
+}
+
+async function render(){
+
+  const list = foods.filter(x=>x.date===today());
+
+  const sum = list.reduce((a,x)=>a+(Number(x.cal)||0),0);
+
+  $('today').textContent =
+
+    new Date().toLocaleDateString('es-CL',{
+
+      weekday:'long',
+
+      day:'numeric',
+
+      month:'long'
+
+    });
+
+  $('total').textContent = sum.toLocaleString('es-CL');
+
+  $('left').textContent =
+
+    Math.max(0,GOAL-sum).toLocaleString('es-CL');
+
+  $('bar').style.width =
+
+    Math.min(100,sum/GOAL*100)+'%';
+
+  $('progress').textContent =
+
+    Math.round(sum/GOAL*100)+'% de tu meta diaria';
+
+  $('todayFoods').replaceChildren();
+
+  $('allFoods').replaceChildren();
+
+  if(!list.length){
+
+    $('todayFoods').textContent = 'Aún no hay comidas.';
+
+  }
+
+  for(const x of [...list].reverse()){
+
+    $('todayFoods').append(await foodRow(x));
+
+  }
+
+  if(!foods.length){
+
+    $('allFoods').textContent = 'Todavía no hay registros.';
+
+  }
+
+  for(const x of [...foods].reverse()){
+
+    $('allFoods').append(await foodRow(x));
+
+  }
+
+  const last = weights.at(-1);
+
+  $('latestWeight').textContent =
+
+    last ? last.kg+' kg' : 'Sin registro';
+
+  $('weightList').textContent =
+
+    weights.slice(-8).reverse()
+
+    .map(x=>dateLabel(x.date)+' · '+x.kg+' kg')
+
+    .join(' | ');
+
+  drawChart();
+
+}
+
+function drawChart(){
+
+  const c = $('chart');
+
+  const ctx = c.getContext('2d');
+
+  ctx.clearRect(0,0,c.width,c.height);
+
+  const a = weights.slice(-12);
+
+  if(!a.length){
+
+    ctx.fillStyle = '#718078';
+
+    ctx.font = '16px sans-serif';
+
+    ctx.fillText('Registra tu peso para ver el gráfico',15,70);
+
+    return;
+
+  }
+
+  const vals = a.map(x=>Number(x.kg));
+
+  const lo = Math.min(...vals)-1;
+
+  const hi = Math.max(...vals)+1;
+
+  ctx.strokeStyle = '#16834e';
+
+  ctx.lineWidth = 3;
+
+  ctx.beginPath();
+
+  a.forEach((x,i)=>{
+
+    const px = 25 + i*(c.width-50)/Math.max(1,a.length-1);
+
+    const py = 15 + (hi-Number(x.kg))/(hi-lo)*(c.height-40);
+
+    if(i===0){
+
+      ctx.moveTo(px,py);
+
+    }else{
+
+      ctx.lineTo(px,py);
+
+    }
+
+  });
+
+  ctx.stroke();
+
+}
+
+$('add').onclick = async ()=>{
+
+  const food = $('food').value.trim();
+
+  const cal = Number($('cal').value);
+
+  if(!food || !Number.isFinite(cal) || cal<=0){
+
+    alert('Escribe la comida y las calorías.');
+
+    return;
+
+  }
+
+  const id = 'f'+Date.now();
+
+  let photoId = null;
+
+  const file = $('photo').files[0];
+
+  if(file){
+
+    photoId = 'p'+id;
+
+    await putPhoto(photoId,file);
+
+  }
+
+  foods.push({
+
+    id,
+
+    date:today(),
+
+    food,
+
+    meal:$('meal').value,
+
+    cal,
+
+    photoId
+
+  });
+
+  persist();
+
+  $('food').value = '';
+
+  $('cal').value = '';
+
+  $('photo').value = '';
+
+  await render();
+
+  alert('Comida guardada.');
+
+};
+
+$('saveWeight').onclick = ()=>{
+
+  const kg = Number($('kg').value);
+
+  if(!Number.isFinite(kg) || kg<=0){
+
+    alert('Ingresa un peso válido.');
+
+    return;
+
+  }
+
+  weights.push({
+
+    date:today(),
+
+    kg
+
+  });
+
+  persist();
+
+  $('kg').value = '';
+
+  render();
+
+};
+
+document.querySelectorAll('[data-tab]').forEach(b=>{
+
+  b.onclick = ()=>{
+
+    document.querySelectorAll('[data-tab]').forEach(x=>{
+
+      x.classList.toggle('active',x===b);
+
+    });
+
+    ['meals','weight','history'].forEach(id=>{
+
+      $(id).classList.toggle('hidden',id!==b.dataset.tab);
+
+    });
+
+  };
+
+});
+
+$('export').onclick = ()=>{
+
+  const blob = new Blob([
+
+    JSON.stringify({
+
+      version:1,
+
+      foods,
+
+      weights
+
+    },null,2)
+
+  ],{
+
+    type:'application/json'
+
+  });
+
+  const a = document.createElement('a');
+
+  a.href = URL.createObjectURL(blob);
+
+  a.download = 'arias-fit-respaldo.json';
+
+  a.click();
+
+  URL.revokeObjectURL(a.href);
+
+};
+
+$('import').onchange = async e=>{
+
+  const f = e.target.files[0];
+
+  if(!f) return;
+
+  try{
+
+    const d = JSON.parse(await f.text());
+
+    if(!Array.isArray(d.foods) || !Array.isArray(d.weights)){
+
+      throw Error();
+
+    }
+
+    foods = d.foods;
+
+    weights = d.weights;
+
+    persist();
+
+    render();
+
+    alert('Respaldo importado.');
+
+  }catch{
+
+    alert('Ese archivo no es válido.');
+
+  }
+
+};
+
+render();
+
+</script>
+
+</body>
+
+</html>
