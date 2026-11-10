@@ -1,0 +1,315 @@
+
+
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Arias Fit</title>
+
+<style>
+
+body {
+
+  font-family: Arial, sans-serif;
+
+  background: #f1f7f3;
+
+  color: #183b2a;
+
+  margin: 0;
+
+  padding: 18px;
+
+}
+
+main { max-width: 550px; margin: auto; }
+
+h1 { color: #16834e; text-align: center; }
+
+.card {
+
+  background: white;
+
+  padding: 18px;
+
+  margin: 15px 0;
+
+  border-radius: 15px;
+
+  box-shadow: 0 2px 10px #0001;
+
+}
+
+input, select, button {
+
+  box-sizing: border-box;
+
+  width: 100%;
+
+  padding: 13px;
+
+  margin: 7px 0;
+
+  border-radius: 9px;
+
+  border: 1px solid #ccc;
+
+  font-size: 16px;
+
+}
+
+button {
+
+  background: #16834e;
+
+  color: white;
+
+  border: none;
+
+  font-weight: bold;
+
+}
+
+.secondary { background: #607d70; }
+
+.total { font-size: 30px; font-weight: bold; }
+
+.item { padding: 10px 0; border-bottom: 1px solid #ddd; }
+
+small { color: #666; }
+
+</style>
+
+</head>
+
+<body>
+
+<main>
+
+<h1>🥗 Arias Fit</h1>
+
+<p style="text-align:center">Mi control de alimentación y peso</p>
+
+<div class="card">
+
+<h2>Calorías de hoy</h2>
+
+<div class="total"><span id="total">0</span> / 2100 kcal</div>
+
+<p id="remaining"></p>
+
+</div>
+
+<div class="card">
+
+<h2>🍽️ Agregar comida</h2>
+
+<input id="food" placeholder="Nombre de la comida">
+
+<select id="meal">
+
+<option>Desayuno</option>
+
+<option>Almuerzo</option>
+
+<option>Cena</option>
+
+<option>Merienda</option>
+
+</select>
+
+<input id="cal" type="number" min="1" placeholder="Calorías">
+
+<button onclick="addFood()">Agregar comida</button>
+
+</div>
+
+<div class="card">
+
+<h2>⚖️ Control de peso</h2>
+
+<p>Meta: 95 kg</p>
+
+<input id="weight" type="number" min="1" step="0.1" placeholder="Peso actual en kg">
+
+<button onclick="addWeight()">Guardar peso</button>
+
+<p id="weightText"></p>
+
+</div>
+
+<div class="card">
+
+<h2>📋 Registro de hoy</h2>
+
+<div id="items"></div>
+
+<button class="secondary" onclick="clearToday()">Borrar comidas de hoy</button>
+
+</div>
+
+<small>Los datos se guardan en este navegador. No se sincronizan entre dispositivos.</small>
+
+</main>
+
+<script>
+
+const goal = 2100;
+
+const today = () => {
+
+  const d = new Date();
+
+  return d.getFullYear() + "-" +
+
+    String(d.getMonth()+1).padStart(2,"0") + "-" +
+
+    String(d.getDate()).padStart(2,"0");
+
+};
+
+function load(key) {
+
+  try { return JSON.parse(localStorage.getItem(key)) || []; }
+
+  catch { return []; }
+
+}
+
+let foods = load("arias-fit-foods");
+
+let weights = load("arias-fit-weights");
+
+function save() {
+
+  localStorage.setItem("arias-fit-foods", JSON.stringify(foods));
+
+  localStorage.setItem("arias-fit-weights", JSON.stringify(weights));
+
+}
+
+function render() {
+
+  const list = foods.filter(x => x.date === today());
+
+  const sum = list.reduce((a,x) => a + x.cal, 0);
+
+  document.getElementById("total").textContent = sum;
+
+  document.getElementById("remaining").textContent =
+
+    sum <= goal
+
+    ? "Te quedan " + (goal-sum) + " calorías."
+
+    : "Has superado la meta por " + (sum-goal) + " calorías.";
+
+  const items = document.getElementById("items");
+
+  items.replaceChildren();
+
+  if (!list.length) {
+
+    items.textContent = "Todavía no registras comidas hoy.";
+
+  }
+
+  list.forEach(x => {
+
+    const div = document.createElement("div");
+
+    div.className = "item";
+
+    div.textContent = x.meal + ": " + x.food + " — " + x.cal + " kcal";
+
+    items.appendChild(div);
+
+  });
+
+  document.getElementById("weightText").textContent =
+
+    weights.length
+
+    ? "Último peso: " + weights[weights.length-1].kg + " kg"
+
+    : "Sin peso registrado.";
+
+}
+
+function addFood() {
+
+  const food = document.getElementById("food").value.trim();
+
+  const cal = Number(document.getElementById("cal").value);
+
+  const meal = document.getElementById("meal").value;
+
+  if (!food || !Number.isFinite(cal) || cal <= 0) {
+
+    alert("Ingresa la comida y sus calorías.");
+
+    return;
+
+  }
+
+  foods.push({ date: today(), food, meal, cal });
+
+  save();
+
+  document.getElementById("food").value = "";
+
+  document.getElementById("cal").value = "";
+
+  render();
+
+}
+
+function addWeight() {
+
+  const kg = Number(document.getElementById("weight").value);
+
+  if (!Number.isFinite(kg) || kg <= 0) {
+
+    alert("Ingresa un peso válido.");
+
+    return;
+
+  }
+
+  weights.push({ date: today(), kg });
+
+  save();
+
+  document.getElementById("weight").value = "";
+
+  render();
+
+}
+
+function clearToday() {
+
+  if (confirm("¿Quieres borrar las comidas de hoy?")) {
+
+    foods = foods.filter(x => x.date !== today());
+
+    save();
+
+    render();
+
+  }
+
+}
+
+render();
+
+</script>
+
+</body>
+
+</html>
